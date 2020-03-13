@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @validation.code %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @validation.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_validation_path(@validation) %> |
+<%= link_to 'Back', validations_path %>
