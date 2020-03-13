@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    render json: {message: 'fetch ok'}
   end
 
   def delete
