@@ -11,7 +11,6 @@ class Validator extends React.Component {
     .catch(x => {
       console.error(x)
     })
-
   }
 
   render () {
