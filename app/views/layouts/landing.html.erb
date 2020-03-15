@@ -2,14 +2,23 @@
 <html>
   <head>
     <title>Fantempo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body>
-    <h1>landing</h1>
-    <%= yield %>
+  <body class="landing">
+    <header class="container">
+      <div>fantempo</div>
+    </header>
+    <section class="container">
+      <%= yield %>
+    </section>
+    <footer class="container">
+      <div>Todos los derechos reservados</div>
+    </footer>
   </body>
 </html>
