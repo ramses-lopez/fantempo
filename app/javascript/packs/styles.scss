@@ -1,0 +1,21 @@
+:root {
+  --cherry: #dd0426;
+  --strawberry: #f02d3a;
+  --dark: #273043;
+  --bluey-grey: #9197ae;
+  --ice-blue: #eef3f6;
+  --font-primary: AvenirNextBold, Arial, sans-serif;
+  --font-secondary: HelveticaNeueLight, Arial, sans-serif;
+}
+
+// bootstrap override
+$primary: #f02d3a; // --strawberry
+$dark: #273043;
+
+// breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+@import 'node_modules/bootstrap/scss/bootstrap';
