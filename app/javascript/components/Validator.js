@@ -6,7 +6,7 @@ class Validator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showValidator: true,
+      showValidator: false,
       input0: React.createRef(),
       input1: React.createRef(),
       input2: React.createRef()
@@ -116,8 +116,6 @@ class Validator extends React.Component {
 
     return (
       <ErrorBoundary>
-        <div>876</div>
-        <div>ABC</div>
         {this.state.showValidator ? codeInput : phoneInput}
       </ErrorBoundary>
     )
