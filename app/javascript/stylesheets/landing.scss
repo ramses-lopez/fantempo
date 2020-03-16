@@ -1,20 +1,64 @@
 .landing {
-
   background-color: var(--dark);
   color: #ffffff;
   font-family: var(--font-primary);
+  padding-top: 38px;
+  padding-bottom: 119px;
+  margin: 0 32px;
+  text-align: center;
+  min-height:100vh;
 
   header {
-    font-family: AvenirNext;
-    font-size: 22px;
-    font-weight: bold;
+    font-family: var(--font-primary-bold);
+    font-size: 21px;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.64;
     letter-spacing: normal;
     text-align: left;
-    color: #ffffff;
-
   }
-  color:var(--ice-blue);
+
+  .btn {
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+  }
+
+  .title {
+    font-size: 26px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    line-height: 1.36;
+    margin-bottom: 40px;
+    color: var(--bluey-grey);
+  }
+
+  .highlight {
+    font-family: var(--font-primary-bold);
+  }
+
+  footer {
+    font-family: var(--font-secondary);
+    font-size: 10px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--bluey-grey);
+  }
+
 }

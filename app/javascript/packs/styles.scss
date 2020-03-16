@@ -4,7 +4,8 @@
   --dark: #273043;
   --bluey-grey: #9197ae;
   --ice-blue: #eef3f6;
-  --font-primary: AvenirNext, Arial, sans-serif;
+  --font-primary: AvenirNextRegular, Arial, sans-serif;
+  --font-primary-bold: AvenirNextBold, Arial, sans-serif;
   --font-secondary: HelveticaNeueLight, Arial, sans-serif;
 }
 
@@ -24,7 +25,7 @@ $breakpoint-xl: 1200px;
 }
 
 @font-face {
-  font-family: AvenirNext;
+  font-family: AvenirNextRegular;
   src: url('../fonts/avenir/AvenirNextLTPro-Regular.otf') format('opentype');
 }
 

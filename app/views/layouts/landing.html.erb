@@ -10,15 +10,15 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body class="landing">
+  <body class="landing d-flex flex-column justify-content-between">
     <header class="container">
       <div>fantempo</div>
     </header>
     <section class="container">
       <%= yield %>
     </section>
-    <footer class="container">
-      <div>Todos los derechos reservados</div>
+    <footer class="container d-flex justify-content-center">
+      <div>Todos los derechos reservados © Fantempo</div>
     </footer>
   </body>
 </html>
