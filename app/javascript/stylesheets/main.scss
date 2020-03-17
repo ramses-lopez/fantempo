@@ -1,0 +1,53 @@
+.main {
+  font-family: var(--font-primary);
+  color: var(--dark);
+  padding-top: 38px;
+  padding-bottom: 119px;
+  margin: 0 32px;
+  text-align: center;
+  min-height:100vh;
+
+  header {
+    font-family: var(--font-primary-bold);
+    font-size: 21px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.64;
+    letter-spacing: normal;
+    text-align: left;
+  }
+
+  .title {
+    font-family: var(--font-primary-bold);
+    font-size: 30px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.13;
+    letter-spacing: normal;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: left;
+  }
+
+  footer {
+    font-family: var(--font-secondary);
+    font-size: 10px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--bluey-grey);
+  }
+
+}

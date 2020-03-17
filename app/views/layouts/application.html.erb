@@ -7,45 +7,13 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <style>
-      .parent {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        background-color: azure;
-      }
-
-      .child {
-        text-align: center;
-        margin: 0 10px;
-        width: 38px;
-        font-size: 36px;
-        background-color: azure;
-        border: none;
-        border-bottom: 1px solid #000;
-        color: #444;
-      }
-    </style>
   </head>
 
-  <body>
-
-    <% unless current_user %>
-      <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-      <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
-    <% else %>
-      <%= current_user.name %>(<%= current_user.email %>) |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-    <% end %>
-
-    <hr/>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= yield %>
+  <body class="main container d-flex flex-column justify-content-between">
+    <%= render 'shared/header' %>
+    <section class="container">
+      <%= yield %>
+    </section>
+    <%= render 'shared/footer' %>
   </body>
 </html>

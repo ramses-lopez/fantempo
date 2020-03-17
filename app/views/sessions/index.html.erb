@@ -1,7 +1,10 @@
-<a href="javascript:void(0)">
-  Google Login
-</a>
-
-<a href="javascript:void(0)">
-  Facebook Login
-</a>
+<div class="d-flex flex-column justify-content-between">
+  <div class="title">
+    Tu artista favorito en tu ciudad
+  </div>
+  <div class="subtitle">
+    Ingresa a nuestra comunidad de fans
+  </div>
+  <%= link_to "Continuar con Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-light btn-lg mb-2" %>
+  <%= link_to "Continuar con Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-light btn-lg" %>
+</div>
