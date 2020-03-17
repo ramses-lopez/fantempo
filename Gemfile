@@ -23,6 +23,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'react-rails'
+gem 'countries'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
