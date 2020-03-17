@@ -3,11 +3,11 @@
     <div>fantempo</div>
 
     <% unless controller.class.name == 'SessionsController' %>
-      <div>
+      <div class="user-menu-header">
         <% unless current_user %>
           <%= link_to "Ingresar", sessions_index_path %>
         <% else %>
-          <%= current_user.name %>(<%= current_user.email %>) |
+          <%= current_user.name %> |
           <%= link_to "Salir", destroy_user_session_path, method: :delete %>
         <% end %>
       </div>

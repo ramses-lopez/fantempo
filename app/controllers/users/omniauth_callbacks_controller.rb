@@ -2,36 +2,27 @@
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    @user = User.from_omniauth(request.env['omniauth.auth'])
-    if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication
-      if is_navigational_format?
-        set_flash_message(:notice, :success, kind: 'Facebook')
-      end
-    else
-      session['devise.facebook_data'] = request.env['omniauth.auth']
-      sign_in_and_redirect @user, event: :authentication
-    end
+    handle_callback('facebook')
   end
 
   def google_oauth2
-    @user = User.from_omniauth(request.env['omniauth.auth'])
-    if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication
-      session['devise.google_oauth2_data'] = request.env['omniauth.auth'].except('extra')
-      if is_navigational_format?
-        set_flash_message(:notice, :success, kind: 'GoogleOAuth2')
-      end
-    else
-      session['devise.google_oauth2_data'] = request.env['omniauth.auth'].except('extra')
-      byebug
-      sign_in_and_redirect @user, event: :authentication
-    end
+    handle_callback('google_oauth2')
   end
 
   def failure
-    # todo
-    redirect_to root_path
+    msg = "#{params['error']}: #{params['error_reason']}. #{params['error_description']}"
+    set_flash_message(:notice, :failure, kind: 'facebook', reason: msg) if is_navigational_format?
+    redirect_to login_path
+  end
+
+  private
+
+  def handle_callback(provider)
+    user = User.from_omniauth(request.env['omniauth.auth'])
+    set_flash_message(:notice, :success, kind: provider.classify) if is_navigational_format?
+    session["devise.#{provider}_data"] = request.env['omniauth.auth'].except('extra')
+    sign_in user
+    redirect_to validations_path
   end
 
 end

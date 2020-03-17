@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :validations
+  resources :validations, only: :index
+
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-  get 'sessions/index'
-  get 'sessions/create'
-  get 'sessions/delete'
+
+  get 'login', to: 'sessions#index'
+
   get 'homepage/index'
   root 'homepage#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

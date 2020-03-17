@@ -1,11 +1,5 @@
 class SessionsController < ApplicationController
   def index
-  end
-
-  def create
-    render json: {message: 'fetch ok'}
-  end
-
-  def delete
+    redirect_to validations_path if current_user
   end
 end

@@ -15,11 +15,20 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+    user = User.where(provider: auth.provider, uid: auth.uid).first_or_initialize do |u|
+      u.email = auth.info.email
+      u.password = Devise.friendly_token[0,20]
+      u.name = auth.info.name # assuming the u model has a name
+      u.image = auth.info.image # assuming the u model has an image
     end
+
+    if user.provider != auth.provider
+      user.provider = auth.provider
+      user.name = auth.info.name
+      user.image = auth.info.image
+      user.save
+    end
+
+    user
   end
 end
