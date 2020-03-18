@@ -3,9 +3,8 @@
   color: var(--dark);
   padding-top: 38px;
   padding-bottom: 119px;
-  margin: 0 32px;
   text-align: center;
-  min-height:100vh;
+  min-height: 100vh;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: normal;
@@ -59,7 +58,7 @@
   margin-bottom: 80px;
 }
 
-.validation-digit{
+.validator-digit{
   border: none;
   border-bottom: 1px solid var(--bluey-grey);
   margin: 0 20px;

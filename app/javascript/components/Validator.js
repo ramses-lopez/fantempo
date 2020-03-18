@@ -65,7 +65,7 @@ class Validator extends React.Component {
         <input
           index={props.index}
           ref={ref}
-          className="validation-digit"
+          className="validator-digit"
           onChange={props.onchangeHandler}
           onKeyDown={e =>
             props.keyPressHandler(e, props.nextref, props.prevref)
