@@ -17,11 +17,17 @@
       <div>fantempo</div>
       <%= render 'shared/notifications' %>
     </header>
-    <section class="container">
-      <%= yield %>
+    <section class="container d-flex justify-content-center">
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12">
+          <%= yield %>
+        </div>
+      </div>
     </section>
-    <footer class="container d-flex justify-content-center">
-      <div>Todos los derechos reservados © Fantempo</div>
+    <footer class="container">
+      <div class="text-xl-right text-lg-right text-md-center text-sm-center">
+        Todos los derechos reservados © Fantempo
+      </div>
     </footer>
   </body>
 </html>
