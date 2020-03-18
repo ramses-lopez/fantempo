@@ -16,6 +16,7 @@ class Validator extends React.Component {
     this.sendCode = this.sendCode.bind(this)
     this.resendCode = this.resendCode.bind(this)
     this.handlePaste = this.handlePaste.bind(this)
+    this.handleFocus = this.handleFocus.bind(this)
   }
 
   sendCode() {
@@ -92,10 +93,10 @@ class Validator extends React.Component {
             {countryPhoneList}
           </select>
           <div className="input-group-append">
-            <input type="tel" maxLength="10"></input>
+            <input className="form-control" type="tel" maxLength="10"></input>
           </div>
         </div>
-        <div className="text-left mb-5">
+        <div className="help-text text-left mb-5">
           Utilizaremos tu número para validar tu identidad
         </div>
 
@@ -105,10 +106,7 @@ class Validator extends React.Component {
       </div>
     );
 
-    const input0 = this.state.input0
-    const input1 = this.state.input1
-    const input2 = this.state.input2
-    const input3 = this.state.input3
+    const { input0, input1, input2, input3 } = this.state
 
     const codeInput = (
       <>
@@ -116,7 +114,7 @@ class Validator extends React.Component {
           Ingresa el código que te envíamos vía SMS
         </div>
         <div
-          className="d-flex flex-row justify-content-around mb-6 text-left"
+          className="d-flex flex-row justify-content-around text-left validator-container"
           onPaste={this.handlePaste}
         >
           <FancyInput
@@ -148,8 +146,8 @@ class Validator extends React.Component {
             keyPressHandler={this.handleFocus}
           ></FancyInput>
         </div>
-        <div className="subtitle">
-          No recibí el código.
+        <div className="subtitle text-center">
+          <span>No recibí el código. </span>
           <a href="javascript:void(0)" onClick={this.resendCode}>
             Reenviar
           </a>
