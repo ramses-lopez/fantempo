@@ -20,7 +20,7 @@ class User < ApplicationRecord
       user.image = auth.info.image
       user.save
     end
-
+    user.save
     user
   end
 end
