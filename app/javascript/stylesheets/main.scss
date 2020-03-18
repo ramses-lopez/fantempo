@@ -46,3 +46,12 @@
     color: var(--bluey-grey);
   }
 }
+
+.validation-digit{
+  border: none;
+  border-bottom: 1px solid var(--bluey-grey);
+  margin: 0 20px;
+  font-size: 28px;
+  text-align: center;
+  width: 30px;
+}

@@ -1,15 +1,16 @@
 import React from "react"
-import PropTypes from "prop-types"
 import ErrorBoundary from "./ErrorBoundary"
 
 class Validator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      phoneList: props.phoneList,
       showValidator: false,
       input0: React.createRef(),
       input1: React.createRef(),
-      input2: React.createRef()
+      input2: React.createRef(),
+      input3: React.createRef()
     }
 
     this.sendCode = this.sendCode.bind(this)
@@ -63,67 +64,105 @@ class Validator extends React.Component {
         <input
           index={props.index}
           ref={ref}
-          className="child"
+          className="validation-digit"
           onChange={props.onchangeHandler}
-          onKeyDown={e => props.keyPressHandler(e, props.nextRef, props.prevRef)}
+          onKeyDown={e =>
+            props.keyPressHandler(e, props.nextref, props.prevref)
+          }
           maxLength="1"
           value={props.value}
+          {...props}
         />
-      )
+      );
+    })
+
+    const countryPhoneList = this.state.phoneList.map((country, i) => {
+      return (<option key={i} value={country.phone_country_code}>
+                {country.flag} +{country.phone_country_code}
+              </option>)
     })
 
     const phoneInput = (
-      <>
-        <select>
-          <option value="1">+1 USA</option>
-          <option value="2">+2 Canada</option>
-          <option value="3">+3 Mexico</option>
-        </select>
-        <input type="tel" maxLength="5"></input>
-        <button onClick={this.sendCode}>Go</button>
-      </>
-    )
+      <div className="d-flex flex-column">
+        <div className="text-left mb-5">
+          Ingresa tu número de teléfono y sé el primero en enterarte del show
+        </div>
+        <div className="input-group mb-2">
+          <select className="custom-select country-list" onChange={() => {}}>
+            {countryPhoneList}
+          </select>
+          <div className="input-group-append">
+            <input type="tel" maxLength="10"></input>
+          </div>
+        </div>
+        <div className="text-left mb-5">
+          Utilizaremos tu número para validar tu identidad
+        </div>
+
+        <button className="btn btn-primary" onClick={this.sendCode}>
+          Validar
+        </button>
+      </div>
+    );
 
     const input0 = this.state.input0
     const input1 = this.state.input1
     const input2 = this.state.input2
+    const input3 = this.state.input3
 
     const codeInput = (
-      <div className="parent" onPaste={this.handlePaste}>
-        <FancyInput
+      <>
+        <div className="subtitle">
+          Ingresa el código que te envíamos vía SMS
+        </div>
+        <div
+          className="d-flex flex-row justify-content-around mb-6 text-left"
           onPaste={this.handlePaste}
-          ref={input0}
-          prevRef={null}
-          nextRef={input1}
-          keyPressHandler={this.handleFocus}
-        ></FancyInput>
-        <FancyInput
-          onPaste={this.handlePaste}
-          ref={input1}
-          prevRef={input0}
-          nextRef={input2}
-          keyPressHandler={this.handleFocus}
-        ></FancyInput>
-        <FancyInput
-          onPaste={this.handlePaste}
-          ref={input2}
-          prevRef={input1}
-          nextRef={null}
-          keyPressHandler={this.handleFocus}
-        ></FancyInput>
-      </div>
-    )
+        >
+          <FancyInput
+            onPaste={this.handlePaste}
+            ref={input0}
+            prevref={null}
+            nextref={input1}
+            keyPressHandler={this.handleFocus}
+          ></FancyInput>
+          <FancyInput
+            onPaste={this.handlePaste}
+            ref={input1}
+            prevref={input0}
+            nextref={input2}
+            keyPressHandler={this.handleFocus}
+          ></FancyInput>
+          <FancyInput
+            onPaste={this.handlePaste}
+            ref={input2}
+            prevref={input1}
+            nextref={input3}
+            keyPressHandler={this.handleFocus}
+          ></FancyInput>
+          <FancyInput
+            onPaste={this.handlePaste}
+            ref={input3}
+            prevref={input2}
+            nextref={null}
+            keyPressHandler={this.handleFocus}
+          ></FancyInput>
+        </div>
+        <div className="subtitle">
+          No recibí el código.
+          <a href="javascript:void(0)" onClick={this.resendCode}>
+            Reenviar
+          </a>
+        </div>
+      </>
+    );
 
     return (
       <ErrorBoundary>
         {this.state.showValidator ? codeInput : phoneInput}
       </ErrorBoundary>
-    )
+    );
   }
-}
-
-Validator.propTypes = {
-  greeting: PropTypes.string
 }
 
 export default Validator

@@ -1,1 +1,10 @@
-<%= react_component("Validator", { greeting: "Hello from react-rails." }) %>
+<div class="row">
+  <div class="col-12">
+    <div class="title text-left">
+      Tu artista favorito en tu ciudad
+    </div>
+    <div class="text-center">
+      <%= react_component("Validator", { phoneList: @phone_list }) %>
+    </div>
+  </div>
+</div>
