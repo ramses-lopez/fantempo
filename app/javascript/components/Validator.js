@@ -6,7 +6,7 @@ class Validator extends React.Component {
     super(props)
     this.state = {
       phoneList: props.phoneList,
-      showValidator: false,
+      showValidator: true,
       input0: React.createRef(),
       input1: React.createRef(),
       input2: React.createRef(),
@@ -44,8 +44,6 @@ class Validator extends React.Component {
 
     event.preventDefault()
 
-    if (!Number.isInteger(Number(key))) return
-
     //go back if backspace or delete
     if ([8, 46].includes(event.keyCode)) {
       event.target.value = ''
@@ -56,6 +54,9 @@ class Validator extends React.Component {
     if(Number.isInteger(Number(key))){
       event.target.value = key
       if (nextNode !== null) nextNode.current.focus()
+    }
+    else{
+      return
     }
   }
 
@@ -148,7 +149,7 @@ class Validator extends React.Component {
         </div>
         <div className="subtitle text-center">
           <span>No recibí el código. </span>
-          <a href="javascript:void(0)" onClick={this.resendCode}>
+          <a href={""} onClick={this.resendCode}>
             Reenviar
           </a>
         </div>
