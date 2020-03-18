@@ -6,14 +6,6 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
-
   def self.from_omniauth(auth)
     user = User.where(email: auth.info.email).first_or_initialize do |u|
       u.email = auth.info.email
