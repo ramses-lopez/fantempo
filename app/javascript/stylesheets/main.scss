@@ -26,7 +26,6 @@
     font-size: 30px;
     font-weight: bold;
     line-height: 1.13;
-    text-align: left;
   }
 
   .subtitle {
@@ -39,7 +38,6 @@
   .help-text {
     font-size: 12px;
     line-height: 1.33;
-    text-align: left;
     color: var(--bluey-grey);
   }
 
@@ -48,9 +46,28 @@
     font-size: 10px;
     font-weight: 300;
     line-height: 1.2;
-    text-align: left;
     color: var(--bluey-grey);
   }
+}
+
+.btn-facebook {
+  background-color: #4a78de;
+  border-color: #4a78de;
+  box-shadow: 0 0 10px 0 rgba(139, 154, 167, 0.16);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+}
+
+.btn-google {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 10px 0 rgba(139, 154, 167, 0.16);
+  color: var(--dark);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
 }
 
 .validator-container{
