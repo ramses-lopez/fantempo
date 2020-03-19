@@ -6,7 +6,7 @@ class Validator extends React.Component {
     super(props)
     this.state = {
       phoneList: props.phoneList,
-      showValidator: true,
+      showValidator: false,
       input0: React.createRef(),
       input1: React.createRef(),
       input2: React.createRef(),
