@@ -297,13 +297,15 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 
+  callback_host = ENV["CALLBACK_HOST"] || 'http://localhost:3000'
+
   config.omniauth :facebook,
     ENV["FACEBOOK_APP_ID"],
     ENV["FACEBOOK_APP_SECRET"],
-    callback_url: "http://localhost:3000/users/auth/facebook/callback"
+    callback_url: "#{callback_host}/users/auth/facebook/callback"
 
   config.omniauth :google_oauth2,
     ENV["GOOGLE_CLIENT_ID"],
     ENV["GOOGLE_CLIENT_SECRET"],
-    callback_url: "http://localhost:3000/users/auth/google_oauth2/callback"
+    callback_url: "#{callback_host}/users/auth/google_oauth2/callback"
 end
