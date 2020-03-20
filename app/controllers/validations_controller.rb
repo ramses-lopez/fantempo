@@ -1,44 +1,24 @@
 class ValidationsController < ApplicationController
-  before_action :set_validation, only: [:show, :edit, :update, :destroy]
-
   def index
     @phone_list = Validation.phone_list
   end
 
-  def phone_list
-    render json: Validation.phone_list
-  end
-
-  def new
-    @validation = Validation.new
-  end
-
-  def edit
-  end
-
   def create
-    @validation = Validation.new(validation_params)
-
-    respond_to do |format|
-      if @validation.save
-        format.html { redirect_to @validation, notice: 'Validation was successfully created.' }
-        format.json { render :show, status: :created, location: @validation }
-      else
-        format.html { render :new }
-        format.json { render json: @validation.errors, status: :unprocessable_entity }
-      end
-    end
+    response = Validation.send_verification(validation_params[:phone_number])
+    byebug
+    render json: response.to_json
   end
 
+  def update
+    response = Validation.validate_code(
+                validation_params[:phone_number],
+                validation_params[:validation_code]
+              )
+    render json: response.to_json
+  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_validation
-      @validation = Validation.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
     def validation_params
-      params.require(:validation).permit(:code, :user_id)
+      params.require(:validation).permit(:phone_number, :validation_code)
     end
 end

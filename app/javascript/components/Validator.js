@@ -7,6 +7,8 @@ class Validator extends React.Component {
     this.state = {
       phoneList: props.phoneList,
       showValidator: false,
+      phoneCountryCode: '1',
+      phoneNumber: '6479138043',
       input0: React.createRef(),
       input1: React.createRef(),
       input2: React.createRef(),
@@ -17,10 +19,53 @@ class Validator extends React.Component {
     this.resendCode = this.resendCode.bind(this)
     this.handlePaste = this.handlePaste.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
+    this.handleCountryCodeChange = this.handleCountryCodeChange.bind(this)
+    this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this)
+    this.validateCode = this.validateCode.bind(this)
   }
 
   sendCode() {
-    this.setState({ showValidator: !this.state.showValidator })
+    //TODO: validate phone number length
+    const phoneNumber = `+${this.state.phoneCountryCode}${this.state.phoneNumber}`
+    const token = document.querySelector('meta[name="csrf-token"]').content
+
+    fetch("/validations", {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({validation: {
+        phone_number: phoneNumber
+      }})
+    })
+      .then(result => {
+        console.log(result);
+        this.setState({ showValidator: !this.state.showValidator });
+      })
+      .catch(error => console.error(error));
+  }
+
+  validateCode(){
+    const phoneNumber = `+${this.state.phoneCountryCode}${this.state.phoneNumber}`
+    const { input0, input1, input2, input3 } = this.state
+    const code = `${input0.current.value}${input1.current.value}${input2.current.value}${input3.current.value}`
+    const token = document.querySelector('meta[name="csrf-token"]').content
+    fetch("/validations", {
+      method: "PUT",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({validation: {
+        phone_number: phoneNumber,
+        validation_code: code
+      }})
+    })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => console.error(error));
   }
 
   resendCode() {
@@ -60,13 +105,22 @@ class Validator extends React.Component {
     }
   }
 
+  handleCountryCodeChange(event){
+    this.setState({phoneCountryCode: event.currentTarget.value})
+  }
+
+  handlePhoneNumberChange(event){
+    this.setState({ phoneNumber: event.currentTarget.value })
+  }
+
   render() {
-    const FancyInput = React.forwardRef((props, ref) => {
+    const CodeInput = React.forwardRef((props, ref) => {
       return (
         <input
           index={props.index}
           ref={ref}
           className="validator-digit"
+          type="tel"
           onChange={props.onchangeHandler}
           onKeyDown={e =>
             props.keyPressHandler(e, props.nextref, props.prevref)
@@ -90,11 +144,16 @@ class Validator extends React.Component {
           Ingresa tu número de teléfono y sé el primero en enterarte del show
         </div>
         <div className="input-group mb-2">
-          <select className="custom-select country-list" onChange={() => {}}>
-            {countryPhoneList}
+          <select className="custom-select country-list"
+            value={this.state.phoneCountryCode}
+            onChange={ this.handleCountryCodeChange }>
+            { countryPhoneList }
           </select>
           <div className="input-group-append">
-            <input className="form-control" type="tel" maxLength="10"></input>
+            <input className="form-control" type="tel" maxLength="10"
+              value={ this.state.phoneNumber}
+              onChange={ this.handlePhoneNumberChange }
+            ></input>
           </div>
         </div>
         <div className="help-text text-left mb-5">
@@ -118,36 +177,39 @@ class Validator extends React.Component {
           className="d-flex flex-row justify-content-around text-left validator-container"
           onPaste={this.handlePaste}
         >
-          <FancyInput
+          <CodeInput
             onPaste={this.handlePaste}
             ref={input0}
             prevref={null}
             nextref={input1}
             keyPressHandler={this.handleFocus}
-          ></FancyInput>
-          <FancyInput
+          ></CodeInput>
+          <CodeInput
             onPaste={this.handlePaste}
             ref={input1}
             prevref={input0}
             nextref={input2}
             keyPressHandler={this.handleFocus}
-          ></FancyInput>
-          <FancyInput
+          ></CodeInput>
+          <CodeInput
             onPaste={this.handlePaste}
             ref={input2}
             prevref={input1}
             nextref={input3}
             keyPressHandler={this.handleFocus}
-          ></FancyInput>
-          <FancyInput
+          ></CodeInput>
+          <CodeInput
             onPaste={this.handlePaste}
             ref={input3}
             prevref={input2}
             nextref={null}
             keyPressHandler={this.handleFocus}
-          ></FancyInput>
+          ></CodeInput>
         </div>
         <div className="subtitle text-center">
+          <button className="btn btn-primary" onClick={this.validateCode}>
+            Validar
+          </button>
           <span>No recibí el código. </span>
           <a href={""} onClick={this.resendCode}>
             Reenviar
