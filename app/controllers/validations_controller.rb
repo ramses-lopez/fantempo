@@ -5,7 +5,6 @@ class ValidationsController < ApplicationController
 
   def create
     response = Validation.send_verification(validation_params[:phone_number])
-    byebug
     render json: response.to_json
   end
 
