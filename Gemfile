@@ -25,7 +25,7 @@ gem 'omniauth-google-oauth2'
 gem 'react-rails'
 gem 'countries'
 gem 'flag-icons-rails'
-
+gem 'twilio-ruby'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
