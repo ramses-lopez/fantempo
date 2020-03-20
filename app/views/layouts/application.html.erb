@@ -15,10 +15,12 @@
   <body class="main d-flex flex-column justify-content-between">
     <%= render 'shared/header' %>
 
-    <section class="container d-flex justify-content-center">
-      <div class="row">
+    <section class="container">
+      <div class="row d-flex justify-content-center">
         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12">
-          <%= yield %>
+          <div class="d-flex justify-content-center">
+            <%= yield %>
+          </div>
         </div>
       </div>
     </section>
