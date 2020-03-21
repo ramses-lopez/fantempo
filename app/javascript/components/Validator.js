@@ -39,11 +39,11 @@ class Validator extends React.Component {
         phone_number: phoneNumber
       }})
     })
-      .then(result => {
-        console.log(result);
-        this.setState({ showValidator: !this.state.showValidator });
-      })
-      .catch(error => console.error(error));
+    .then(result => {
+      console.log(result);
+      this.setState({ showValidator: !this.state.showValidator });
+    })
+    .catch(error => console.error(error));
   }
 
   validateCode(){
@@ -62,10 +62,10 @@ class Validator extends React.Component {
         validation_code: code
       }})
     })
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => console.error(error));
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => console.error(error))
   }
 
   resendCode() {
@@ -144,7 +144,7 @@ class Validator extends React.Component {
           Ingresa tu número de teléfono y sé el primero en enterarte del show
         </div>
         <div className="input-group mb-2">
-          <select className="custom-select country-list"
+          <select className="custom-select country-list border-right-0"
             value={this.state.phoneCountryCode}
             onChange={ this.handleCountryCodeChange }>
             { countryPhoneList }

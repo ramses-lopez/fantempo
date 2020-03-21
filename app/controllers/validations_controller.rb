@@ -3,16 +3,22 @@ class ValidationsController < ApplicationController
     @phone_list = Validation.phone_list
   end
 
+  # send validation code
   def create
-    response = Validation.send_verification(validation_params[:phone_number])
+    # TODO: Uncomment to enable twilio
+    # response = Validation.send_verification(validation_params[:phone_number])
+    response = { message: 'ok' }
     render json: response.to_json
   end
 
+  # validate code
   def update
-    response = Validation.validate_code(
-                validation_params[:phone_number],
-                validation_params[:validation_code]
-              )
+    # TODO: Uncomment to enable twilio
+    # response = Validation.validate_code(
+    #             validation_params[:phone_number],
+    #             validation_params[:validation_code]
+    #           )
+    response = { message: 'ok' }
     render json: response.to_json
   end
 

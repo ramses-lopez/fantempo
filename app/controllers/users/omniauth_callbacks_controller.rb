@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  skip_before_action :redirect_if_logged_out
-  # skip_before_action :redirect_if_logged_in
-
   def facebook
     handle_callback('facebook')
   end

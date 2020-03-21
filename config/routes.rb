@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'locator/index'
   resources :validations, only: [:index, :create]
   put 'validations', to: 'validations#update'
 
