@@ -8,8 +8,12 @@ class Map extends React.Component {
     this.state = {
       lng: 5,
       lat: 34,
-      zoom: 5
-    };
+      zoom: 11,
+      locationName: 'City name here',
+      map: null
+    }
+
+    this.handleCitySelect = this.handleCitySelect.bind(this)
   }
 
   componentDidMount() {
@@ -28,34 +32,40 @@ class Map extends React.Component {
         lat: map.getCenter().lat.toFixed(4),
         zoom: map.getZoom().toFixed(2)
       })
-
-      console.log(this.state.lng, this.state.lat)
     })
+
+    this.setState({ map: map })
   }
 
   handleSaveLocation(){
     console.log("handleSaveLocation");
   }
 
-  render() {
-    const countryList = [
-      <option key="0">Toronto, Canada</option>,
-      <option key="1">Miami, USA</option>,
-      <option key="2">Madrid, Spain</option>
-    ]
+  handleCitySelect(event){
+    const currentLocation = event.currentTarget.value.split(",")
+    this.setState({lng: currentLocation[0], lat: currentLocation[1]})
+    this.state.map.setCenter({ lng: currentLocation[0], lat: currentLocation[1] })
+  }
 
-    const locationName = "Toronto y alrededores (10 km)"
+  render() {
+    const countryList = this.props.cityList.map((city, i) => {
+      return <option key={i} value={`${city.lng},${city.lat}`}>
+              { city.name }
+            </option>;
+    })
 
     return (
       <>
-        <select className="custom-select mb-2" value={1} onChange={() => {}}>
+        <select className="custom-select mb-2"
+            value={`${this.state.lng},${this.state.lat}`}
+            onChange={this.handleCitySelect}>
           {countryList}
         </select>
         <div
           ref={el => (this.mapContainer = el)}
           className="mapContainer mb-2"
         />
-        <div className="text-left subtitle mb-5">{locationName}</div>
+        <div className="text-left subtitle mb-5">{this.state.locationName}</div>
         <button className="btn btn-primary" onClick={ this.handleSaveLocation }>
           Aceptar
         </button>

@@ -1,6 +1,6 @@
 class ValidationsController < ApplicationController
   def index
-    @phone_list = Validation.phone_list
+    @phone_list = CountryList.phone_list
   end
 
   # send validation code
