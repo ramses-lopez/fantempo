@@ -8,7 +8,7 @@ class Map extends React.Component {
     this.state = {
       lng: 5,
       lat: 34,
-      zoom: 11,
+      zoom: 9,
       locationName: 'City name here',
       map: null
     }
@@ -31,6 +31,67 @@ class Map extends React.Component {
         lng: map.getCenter().lng.toFixed(4),
         lat: map.getCenter().lat.toFixed(4),
         zoom: map.getZoom().toFixed(2)
+      })
+    })
+
+    map.on("load", () => {
+
+      // map.loadImage("https://i.imgur.com/MK4NUzI.png", (error, image) => {
+      //   if (error) throw error
+      //   map.addImage("custom-marker", image)
+      //   // A style layer ties together the source and image and specifies how they are displayed on the map.
+      //   map.addLayer({
+      //     id: "markers",
+      //     type: "symbol",
+      //     // A data source specifies the geographic coordinate where the image marker gets placed.
+      //     source: {
+      //       type: "geojson",
+      //       data: {
+      //         type: 'FeatureCollection',
+      //         features: [
+      //           {
+      //             type: 'Feature',
+      //             properties: {},
+      //             geometry: {
+      //               type: "Point",
+      //               coordinates: [this.state.lng, this.state.lat]
+      //             }
+      //           },
+      //         ]
+      //       }
+      //     },
+      //     layout: {
+      //       "icon-image": "custom-marker",
+      //     }
+      //   })
+      // })
+
+      map.addSource("source_circle_500", {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": [{
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [0, 0]
+            }
+          }]
+        }
+      })
+
+      map.addLayer({
+        "id": "circle500",
+        "type": "circle",
+        "source": "source_circle_500",
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "circle-radius": 1000000,
+          "circle-color": "#000000",
+          "circle-opacity": 1
+        }
       })
     })
 
