@@ -1,5 +1,6 @@
 class ValidationsController < ApplicationController
   def index
+    @artist_name = session[:artist_id].present? ? Artist.find(session[:artist_id]).name : 'Tu artista favorito'
     @phone_list = CountryList.phone_list
   end
 

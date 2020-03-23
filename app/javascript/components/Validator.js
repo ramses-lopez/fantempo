@@ -8,7 +8,7 @@ class Validator extends React.Component {
       phoneList: props.phoneList,
       showValidator: false,
       phoneCountryCode: '1',
-      phoneNumber: '6479138043',
+      phoneNumber: '',
       input0: React.createRef(),
       input1: React.createRef(),
       input2: React.createRef(),
@@ -26,7 +26,8 @@ class Validator extends React.Component {
 
   sendCode() {
     //TODO: validate phone number length
-    const phoneNumber = `+${this.state.phoneCountryCode}${this.state.phoneNumber}`
+    const phoneCountryCode = this.state.phoneCountryCode;
+    const phoneNumber = `+${phoneCountryCode}${this.state.phoneNumber}`;
     const token = document.querySelector('meta[name="csrf-token"]').content
 
     fetch("/validations", {
@@ -47,7 +48,8 @@ class Validator extends React.Component {
   }
 
   validateCode(){
-    const phoneNumber = `+${this.state.phoneCountryCode}${this.state.phoneNumber}`
+    const phoneCountryCode = this.state.phoneCountryCode
+    const phoneNumber = `+${phoneCountryCode}${this.state.phoneNumber}`
     const { input0, input1, input2, input3 } = this.state
     const code = `${input0.current.value}${input1.current.value}${input2.current.value}${input3.current.value}`
     const token = document.querySelector('meta[name="csrf-token"]').content
@@ -67,7 +69,9 @@ class Validator extends React.Component {
       const host = `${location.protocol}//${window.location.hostname}:${window.location.port}/locator/index`
       window.location = host
     })
-    .catch(error => console.error(error))
+    .catch(error => {
+      console.error(error)
+    })
   }
 
   resendCode() {
@@ -108,7 +112,8 @@ class Validator extends React.Component {
   }
 
   handleCountryCodeChange(event){
-    this.setState({phoneCountryCode: event.currentTarget.value})
+    const countryCode = event.currentTarget.value.split('-')[1]
+    this.setState({phoneCountryCode: countryCode})
   }
 
   handlePhoneNumberChange(event){
@@ -135,9 +140,14 @@ class Validator extends React.Component {
     })
 
     const countryPhoneList = this.state.phoneList.map((country, i) => {
-      return (<option key={i} value={country.phone_country_code}>
-                {country.flag} +{country.phone_country_code}
-              </option>)
+      return (
+        <option
+          key={i}
+          value={`${country.country_code}-${country.phone_country_code}`}
+        >
+          {country.flag} +{country.phone_country_code}
+        </option>
+      );
     })
 
     const phoneInput = (
