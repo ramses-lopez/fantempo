@@ -64,6 +64,8 @@ class Validator extends React.Component {
     })
     .then(result => {
       console.log(result);
+      const host = `${location.protocol}//${window.location.hostname}:${window.location.port}/locator/index`
+      window.location = host
     })
     .catch(error => console.error(error))
   }
@@ -161,7 +163,7 @@ class Validator extends React.Component {
         </div>
 
         <button className="btn btn-primary" onClick={this.sendCode}>
-          Validar
+          Envíar código
         </button>
       </div>
     );
@@ -207,13 +209,20 @@ class Validator extends React.Component {
           ></CodeInput>
         </div>
         <div className="subtitle text-center">
-          <button className="btn btn-primary" onClick={this.validateCode}>
-            Validar
-          </button>
-          <span>No recibí el código. </span>
-          <a href={""} onClick={this.resendCode}>
-            Reenviar
-          </a>
+          <div className="d-flex flex-column justify-content-center ">
+            <button
+              className="btn btn-primary mb-5"
+              onClick={this.validateCode}
+            >
+              Validar
+            </button>
+            <div>
+              <span>No recibí el código. </span>
+              <a href={""} onClick={this.resendCode}>
+                Reenviar
+              </a>
+            </div>
+          </div>
         </div>
       </>
     );
