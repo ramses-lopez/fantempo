@@ -116,21 +116,25 @@ class Map extends React.Component {
     })
 
     return (
-      <>
-        <select className="custom-select mb-2"
-            value={`${this.state.lng},${this.state.lat}`}
-            onChange={this.handleCitySelect}>
-          {countryList}
-        </select>
-        <div
-          ref={el => (this.mapContainer = el)}
-          className="mapContainer mb-2"
-        />
-        <div className="text-left subtitle mb-5">{this.state.locationName}</div>
-        <button className="btn btn-primary" onClick={ this.handleSaveLocation }>
-          Aceptar
-        </button>
-      </>
+
+            <div className="d-flex flex-column justify-content-center">
+              <select className="custom-select mb-2"
+                value={`${this.state.lng},${this.state.lat}`}
+                onChange={this.handleCitySelect}>
+                {countryList}
+              </select>
+              <div
+                ref={el => (this.mapContainer = el)}
+                className="mapContainer mb-2"
+              />
+              <div className="text-left subtitle mb-5">{this.state.locationName}</div>
+              <button className="btn btn-primary" onClick={this.handleSaveLocation}>
+                Aceptar
+              </button>
+            </div>
+
+
+
     );
   }
 }
