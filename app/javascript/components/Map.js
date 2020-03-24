@@ -6,10 +6,10 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: 5,
-      lat: 34,
+      lng: 0,
+      lat: 0,
       zoom: 9,
-      locationName: 'City name here',
+      currentCity: {name: 'Selecciona una ciudad'},
       map: null
     }
 
@@ -17,12 +17,19 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
+    //set initial value for map
+    const initialLocation = document.querySelector('#city-select').value.split(',')
+    const currentCity = this.props.cityList.filter(
+      x => x.lng == initialLocation[0] && x.lat == initialLocation[1]
+    )[0];
+    this.setState({ lng: initialLocation[0], lat: initialLocation[1], currentCity: currentCity })
+
     mapboxgl.accessToken = this.props.mapboxToken
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [this.state.lng, this.state.lat],
+      center: [initialLocation[0], initialLocation[1]],
       zoom: this.state.zoom
     })
 
@@ -66,33 +73,33 @@ class Map extends React.Component {
       //   })
       // })
 
-      map.addSource("source_circle_500", {
-        "type": "geojson",
-        "data": {
-          "type": "FeatureCollection",
-          "features": [{
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [0, 0]
-            }
-          }]
-        }
-      })
+      // map.addSource("source_circle_500", {
+      //   "type": "geojson",
+      //   "data": {
+      //     "type": "FeatureCollection",
+      //     "features": [{
+      //       "type": "Feature",
+      //       "geometry": {
+      //         "type": "Point",
+      //         "coordinates": [0, 0]
+      //       }
+      //     }]
+      //   }
+      // })
 
-      map.addLayer({
-        "id": "circle500",
-        "type": "circle",
-        "source": "source_circle_500",
-        "layout": {
-          "visibility": "none"
-        },
-        "paint": {
-          "circle-radius": 1000000,
-          "circle-color": "#000000",
-          "circle-opacity": 1
-        }
-      })
+      // map.addLayer({
+      //   "id": "circle500",
+      //   "type": "circle",
+      //   "source": "source_circle_500",
+      //   "layout": {
+      //     "visibility": "none"
+      //   },
+      //   "paint": {
+      //     "circle-radius": 1000000,
+      //     "circle-color": "#000000",
+      //     "circle-opacity": 1
+      //   }
+      // })
     })
 
     this.setState({ map: map })
@@ -104,12 +111,20 @@ class Map extends React.Component {
 
   handleCitySelect(event){
     const currentLocation = event.currentTarget.value.split(",")
-    this.setState({lng: currentLocation[0], lat: currentLocation[1]})
+    const currentCity = this.props.cityList.filter(
+      x => x.lng == currentLocation[0] && x.lat == currentLocation[1]
+    )[0];
+
+    this.setState({lng: currentLocation[0],
+      lat: currentLocation[1],
+      currentCity: currentCity
+    })
+
     this.state.map.setCenter({ lng: currentLocation[0], lat: currentLocation[1] })
   }
 
   render() {
-    const countryList = this.props.cityList.map((city, i) => {
+    const cityList = this.props.cityList.map((city, i) => {
       return  <option key={i} value={`${city.lng},${city.lat}`}>
                 { city.name }
               </option>
@@ -117,16 +132,19 @@ class Map extends React.Component {
 
     return (
       <div className="d-flex flex-column justify-content-center">
-        <select className="custom-select mb-2"
+        <select id="city-select" className="custom-select mb-2"
           value={`${this.state.lng},${this.state.lat}`}
-          onChange={this.handleCitySelect}>
-          {countryList}
+          onChange={this.handleCitySelect}
+          >
+          {cityList}
         </select>
         <div
           ref={el => (this.mapContainer = el)}
           className="mapContainer mb-2"
         />
-        <div className="text-left subtitle mb-5">{this.state.locationName}</div>
+        <div className="text-left subtitle mb-5">
+          {this.state.currentCity.name} y alrededores
+        </div>
         <button className="btn btn-primary" onClick={this.handleSaveLocation}>
           Aceptar
         </button>
