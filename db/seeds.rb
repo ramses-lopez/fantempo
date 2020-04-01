@@ -13,3 +13,10 @@ Artist.create!([
   {name: "Rawayana", image_url: 'https://i.ytimg.com/vi/ozXIAg7zp9I/maxresdefault.jpg'},
 ]
 )
+
+Location.create!([
+  {country_code: 'ES', name: "Madrid", lng: -3.7041, lat: 40.4174 },
+  {country_code: 'CA', name: "Toronto", lng: -79.3875, lat: 43.6515 },
+  {country_code: 'VE', name: "Caracas", lng: -66.9170, lat: 10.4949 },
+  {country_code: 'CL', name: "Santiago de Chile", lng: -70.6462, lat: -33.4385 }
+])

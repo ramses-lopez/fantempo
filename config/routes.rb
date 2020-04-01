@@ -1,13 +1,16 @@
-Rails.application.routes.draw do
-  get 'locator/index'
-  resources :validations, only: [:index, :create]
-  put 'validations', to: 'validations#update'
+# frozen_string_literal: true
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+Rails.application.routes.draw do
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  resources :artists, only: [:index]
+  resources :locator, only: [:index]
+  resources :validations, only: %i[index create update]
+  resources :homepage, only: [:index]
+  # put 'validations', to: 'validations#update'
 
   get 'login', to: 'sessions#index'
-  get 'phone-list', to: 'validations#phone_list'
 
-  get 'homepage/index'
+  # get 'homepage/index'
   root 'homepage#index'
 end
