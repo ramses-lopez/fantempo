@@ -15,8 +15,9 @@ class Validation < ApplicationRecord
                          .verifications
                          .create(to: phone_number, channel: 'sms')
 
-    puts "sending code to #{phone_number}: #{verification_check.status} "
+    puts "sending code to #{phone_number}: #{verification.status}" if Rails.env.development?
 
+    # status should be pending
     verification.status
   end
 
@@ -31,7 +32,9 @@ class Validation < ApplicationRecord
                                .services(verify_sid)
                                .verification_checks
                                .create(to: phone_number, code: validation_code)
-    puts "validating code for #{phone_number} (#{validation_code}): #{verification_check.status}"
+    if Rails.env.development?
+      puts "validating code for #{phone_number} (#{validation_code}): #{verification_check.status}"
+    end
     verification_check.status
   end
 end

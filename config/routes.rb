@@ -5,12 +5,11 @@ Rails.application.routes.draw do
 
   resources :artists, only: [:index]
   resources :locator, only: [:index]
-  resources :validations, only: %i[index create update]
   resources :homepage, only: [:index]
-  # put 'validations', to: 'validations#update'
-
+  resources :validations, only: %i[index create]
+  # allow a PUT request w/o an id
+  put 'validations', to: 'validations#update'
   get 'login', to: 'sessions#index'
 
-  # get 'homepage/index'
   root 'homepage#index'
 end

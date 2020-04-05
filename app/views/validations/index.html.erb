@@ -4,7 +4,9 @@
       <%= @artist_name %> en tu ciudad
     </div>
     <div class="text-center">
-      <%= react_component("Validator", { phoneList: @phone_list }) %>
+      <%= react_component("Validator",
+        { phoneList: @phone_list, redirectionPath: locator_index_path})
+      %>
     </div>
   </div>
 </div>

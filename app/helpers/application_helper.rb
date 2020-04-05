@@ -1,6 +1,7 @@
 module ApplicationHelper
   def redirect_if_logged_in
-    redirect_to validations_path if current_user.present?
+    # TODO redirect to user landing if user has a validated number
+    redirect_to validations_path unless current_user.nil?
   end
 
   def redirect_if_logged_out

@@ -40,6 +40,7 @@ class Validator extends React.Component {
         phone_number: phoneNumber
       }})
     })
+    .then(res => res.json())
     .then(result => {
       console.log(result);
       this.setState({ showValidator: !this.state.showValidator });
@@ -51,7 +52,8 @@ class Validator extends React.Component {
     const phoneCountryCode = this.state.phoneCountryCode
     const phoneNumber = `+${phoneCountryCode}${this.state.phoneNumber}`
     const { input0, input1, input2, input3 } = this.state
-    const code = `${input0.current.value}${input1.current.value}${input2.current.value}${input3.current.value}`
+    const code =
+      `${input0.current.value}${input1.current.value}${input2.current.value}${input3.current.value}`
     const token = document.querySelector('meta[name="csrf-token"]').content
     fetch("/validations", {
       method: "PUT",
@@ -64,13 +66,14 @@ class Validator extends React.Component {
         validation_code: code
       }})
     })
+    .then(result => result.json())
     .then(result => {
       console.log(result);
-      const host = `${location.protocol}//${window.location.hostname}:${window.location.port}/locator/index`
-      window.location = host
+      window.location = this.props.redirectionPath
     })
     .catch(error => {
       console.error(error)
+      // TODO : Show error
     })
   }
 

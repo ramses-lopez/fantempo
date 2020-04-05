@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
-  belongs_to :location
+  belongs_to :location, optional: true
 
   def self.from_omniauth(auth)
     user = User.where(email: auth.info.email).first_or_initialize do |u|
@@ -23,4 +23,10 @@ class User < ApplicationRecord
     user.save
     user
   end
+
+  def validate_phone_number!
+    self.phone_number_validated_on = Time.now
+    self.save
+  end
+
 end
