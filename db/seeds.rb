@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Artist.delete_all
 Artist.create!([
   {name: "Amigos Invisibles", image_url: 'http://salsacircuit.com/wp-content/uploads/2017/02/los-amigos-invisibles.jpg'},
   {name: "Caramelos de Cianuro", image_url: 'http://1.bp.blogspot.com/_R8sXCTZldrU/THL6_ue1oWI/AAAAAAAAEGQ/Hz4vq9alsqI/s1600/AFp1.png'},
@@ -14,6 +15,7 @@ Artist.create!([
 ]
 )
 
+Location.delete_all
 Location.create!([
   {country_code: 'ES', name: "Madrid", lng: -3.7041, lat: 40.4174 },
   {country_code: 'CA', name: "Toronto", lng: -79.3875, lat: 43.6515 },
