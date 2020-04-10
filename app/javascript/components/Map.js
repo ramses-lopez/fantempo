@@ -42,36 +42,35 @@ class Map extends React.Component {
     })
 
     map.on("load", () => {
-
-      // map.loadImage("https://i.imgur.com/MK4NUzI.png", (error, image) => {
-      //   if (error) throw error
-      //   map.addImage("custom-marker", image)
-      //   // A style layer ties together the source and image and specifies how they are displayed on the map.
-      //   map.addLayer({
-      //     id: "markers",
-      //     type: "symbol",
-      //     // A data source specifies the geographic coordinate where the image marker gets placed.
-      //     source: {
-      //       type: "geojson",
-      //       data: {
-      //         type: 'FeatureCollection',
-      //         features: [
-      //           {
-      //             type: 'Feature',
-      //             properties: {},
-      //             geometry: {
-      //               type: "Point",
-      //               coordinates: [this.state.lng, this.state.lat]
-      //             }
-      //           },
-      //         ]
-      //       }
-      //     },
-      //     layout: {
-      //       "icon-image": "custom-marker",
-      //     }
-      //   })
-      // })
+      map.loadImage("https://i.imgur.com/MK4NUzI.png", (error, image) => {
+        if (error) throw error
+        map.addImage("custom-marker", image)
+        // A style layer ties together the source and image and specifies how they are displayed on the map.
+        map.addLayer({
+          id: "markers",
+          type: "symbol",
+          // A data source specifies the geographic coordinate where the image marker gets placed.
+          source: {
+            type: "geojson",
+            data: {
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  properties: {},
+                  geometry: {
+                    type: "Point",
+                    coordinates: [this.state.lng, this.state.lat]
+                  }
+                },
+              ]
+            }
+          },
+          layout: {
+            "icon-image": "custom-marker",
+          }
+        })
+      })
 
       // map.addSource("source_circle_500", {
       //   "type": "geojson",
@@ -132,10 +131,15 @@ class Map extends React.Component {
 
     return (
       <div className="d-flex flex-column justify-content-center">
-        <select id="city-select" className="custom-select mb-2"
+        <div>
+          {this.state.lat}, {this.state.lng}
+        </div>
+        <select
+          id="city-select"
+          className="custom-select mb-2"
           value={`${this.state.lng},${this.state.lat}`}
           onChange={this.handleCitySelect}
-          >
+        >
           {cityList}
         </select>
         <div
@@ -149,7 +153,7 @@ class Map extends React.Component {
           Aceptar
         </button>
       </div>
-    )
+    );
   }
 }
 
