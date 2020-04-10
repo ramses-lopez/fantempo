@@ -1,5 +1,5 @@
 class LocatorController < ApplicationController
   def index
-    @city_list = CountryList.city_list
+    @city_list = Location.city_list
   end
 end
