@@ -144,7 +144,7 @@ class Map extends React.Component {
         </select>
         <div
           ref={el => (this.mapContainer = el)}
-          className="mapContainer mb-2"
+          className="map-container mb-2"
         />
         <div className="text-left subtitle mb-5">
           {this.state.currentCity.name} y alrededores

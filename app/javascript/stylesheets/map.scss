@@ -1,7 +1,41 @@
-.mapContainer {
+.map-container {
   position: relative;
   top: 0;
   left: 0;
   height: 380px;
-  width: 300px;
+}
+
+.map-container {
+  margin: 1rem 0;
+  padding: 1rem 0;
+  color: cyan;
+  font-weight: bold;
+}
+
+@media (max-width: $breakpoint-sm) {
+  .map-container{
+//   background-color: red; 
+    width: 300px;
+  }
+}
+
+@media (min-width: calc(#{$breakpoint-sm} + 1px)) and (max-width: $breakpoint-md){
+  .map-container{
+//    background-color: blue;
+    width: 500px;
+  }
+}
+
+@media (min-width: calc(#{$breakpoint-md} + 1px)) and (max-width: $breakpoint-lg){
+  .map-container{
+//    background-color: green;
+    width: 500px;
+  }
+}
+
+@media (min-width: $breakpoint-lg){
+  .map-container{
+//    background-color: yellow;
+    width: 600px; 
+  }
 }

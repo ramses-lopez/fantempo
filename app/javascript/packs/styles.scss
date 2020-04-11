@@ -1,3 +1,11 @@
+
+// breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+
 :root {
   --cherry: #dd0426;
   --strawberry: #f02d3a;
@@ -7,17 +15,12 @@
   --font-primary: AvenirNextRegular, Arial, sans-serif;
   --font-primary-bold: AvenirNextBold, Arial, sans-serif;
   --font-secondary: HelveticaNeueLight, Arial, sans-serif;
+  --breakpoint-sm: $breakpoint-sm; 
 }
 
 // bootstrap override
 $primary: #f02d3a; // --strawberry
 $dark: #273043;
-
-// breakpoints
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
 
 @font-face {
   font-family: AvenirNextBold;
@@ -38,3 +41,4 @@ $breakpoint-xl: 1200px;
 @import '../stylesheets/landing';
 @import '../stylesheets/main';
 @import '../stylesheets/map';
+
